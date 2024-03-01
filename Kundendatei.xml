@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfKunde xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Kunde typ="geschaeftlich" rating="3">
+    <Id>2</Id>
+    <Vorname>Anna</Vorname>
+    <Nachname>Musterfrau</Nachname>
+    <Geburtsdatum>20.3.1984</Geburtsdatum>
+    <Alter>40</Alter>
+    <Geschlecht>weiblich</Geschlecht>
+    <Adresse>12345 Berlin</Adresse>
+    <Bankverbindung>DE34 5678 1000 0025 9876 54</Bankverbindung>
+    <Telefonnummer>01551234567</Telefonnummer>
+  </Kunde>
+</ArrayOfKunde>
