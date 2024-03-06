@@ -1,14 +1,58 @@
-<?xml version="1.0" encoding="utf-8"?>
-<ArrayOfKunde xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Kunde typ="geschaeftlich" rating="3">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfCustomer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Customer type="privat" rating="2">
+    <Id>6</Id>
+    <Surname>Sara</Surname>
+    <Name>Knallermann</Name>
+    <Birthday>10.8.2003</Birthday>
+    <Age>21</Age>
+    <Gender>maennlich</Gender>
+    <Address>80678 München</Address>
+    <BankAccount>DE12 3456 1000 0025 2937 90</BankAccount>
+    <TelephoneNumber>0177689654</TelephoneNumber>
+  </Customer>
+  <Customer type="privat" rating="2">
+    <Id>5</Id>
+    <Surname>Torsten</Surname>
+    <Name>Knallermann</Name>
+    <Birthday>10.8.2003</Birthday>
+    <Age>21</Age>
+    <Gender>maennlich</Gender>
+    <Address>80678 München</Address>
+    <BankAccount>DE12 3456 1000 0025 2937 90</BankAccount>
+    <TelephoneNumber>0177689654</TelephoneNumber>
+  </Customer>
+  <Customer type="privat" rating="2">
+    <Id>4</Id>
+    <Surname>Torsten</Surname>
+    <Name>Knallermann</Name>
+    <Birthday>10.8.2003</Birthday>
+    <Age>21</Age>
+    <Gender>maennlich</Gender>
+    <Address>80678 München</Address>
+    <BankAccount>DE12 3456 1000 0025 2937 90</BankAccount>
+    <TelephoneNumber>0177689654</TelephoneNumber>
+  </Customer>
+  <Customer type="privat" rating="2">
     <Id>2</Id>
-    <Vorname>Anna</Vorname>
-    <Nachname>Musterfrau</Nachname>
-    <Geburtsdatum>20.3.1984</Geburtsdatum>
-    <Alter>40</Alter>
-    <Geschlecht>weiblich</Geschlecht>
-    <Adresse>12345 Berlin</Adresse>
-    <Bankverbindung>DE34 5678 1000 0025 9876 54</Bankverbindung>
-    <Telefonnummer>01551234567</Telefonnummer>
-  </Kunde>
-</ArrayOfKunde>
+    <Surname>Torsten</Surname>
+    <Name>Knallermann</Name>
+    <Birthday>10.8.2003</Birthday>
+    <Age>21</Age>
+    <Gender>maennlich</Gender>
+    <Address>80678 München</Address>
+    <BankAccount>DE12 3456 1000 0025 2937 90</BankAccount>
+    <TelephoneNumber>0177689654</TelephoneNumber>
+  </Customer>
+  <Customer type="privat" rating="2">
+    <Id>3</Id>
+    <Surname>Torsten</Surname>
+    <Name>Knallermann</Name>
+    <Birthday>10.8.2003</Birthday>
+    <Age>21</Age>
+    <Gender>maennlich</Gender>
+    <Address>80678 München</Address>
+    <BankAccount>DE12 3456 1000 0025 2937 90</BankAccount>
+    <TelephoneNumber>0177689654</TelephoneNumber>
+  </Customer>
+</ArrayOfCustomer>
