@@ -22,7 +22,6 @@ namespace Werkzeugverleih
         // Filepath and Filename to save Xml-File
         private string FilePath = @"C:\Users\Patri\OneDrive\Dokumente\VaWi\C_Sharp\Pruefungsleistung\OBJC_WS2023_Hausarbeit_Schubert";
         private string FileName = @"Kundendatei.xml";
-
         // customer-object
         private T _customer;
         // List of new customer Objects -> advantage: initialization does not depend on any constructor
