@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfCustomer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Customer>
+    <Id>2</Id>
+    <Surname>Sara</Surname>
+    <Name>Grossmann</Name>
+    <Birthday>2005-06-05T00:00:00</Birthday>
+    <Gender>weiblich</Gender>
+    <Address>Hauptstrasse 10b</Address>
+    <BankAccount>DE66 7568 7465 3677 35</BankAccount>
+    <CustomerType>geschaeftlich</CustomerType>
+    <TelephoneNumber>0152 839 474 278 34</TelephoneNumber>
+    <Rating>3</Rating>
+  </Customer>
+  <Customer>
+    <Id>1</Id>
+    <Surname>Torben</Surname>
+    <Name>Mustermann</Name>
+    <Birthday>1998-05-30T00:00:00</Birthday>
+    <Gender>maennlich</Gender>
+    <Address>Habergasse 20c</Address>
+    <BankAccount>De55 7863 2435 2888 29</BankAccount>
+    <CustomerType>privat</CustomerType>
+    <TelephoneNumber>0151 567 24 567 25</TelephoneNumber>
+    <Rating>2</Rating>
+  </Customer>
+</ArrayOfCustomer>

@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfToolCategory xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ToolCategory>
+    <Name>Haushaltsgeräte</Name>
+    <CategoryId>45</CategoryId>
+    <Description>Kleine Werkzeuge die im Haushalt helfen sollen.</Description>
+    <PricePerDay>5.5</PricePerDay>
+  </ToolCategory>
+  <ToolCategory>
+    <Name>Gartengeräte</Name>
+    <CategoryId>10</CategoryId>
+    <Description>Für Arbeiten im Garten.</Description>
+    <PricePerDay>10</PricePerDay>
+  </ToolCategory>
+  <ToolCategory>
+    <Name>Sägen</Name>
+    <CategoryId>20</CategoryId>
+    <Description>Mit diesen Werkzeugen können Sägearbeiten ausgeführt werden.</Description>
+    <PricePerDay>8.5</PricePerDay>
+  </ToolCategory>
+  <ToolCategory>
+    <Name>Schwere Bohrwerzeuge</Name>
+    <CategoryId>30</CategoryId>
+    <Description>Für schwere und große Bohrarbeiten in Haus, Heim und auf der Baustelle.</Description>
+    <PricePerDay>20</PricePerDay>
+  </ToolCategory>
+  <ToolCategory>
+    <Name>Bohrmaschinen</Name>
+    <CategoryId>40</CategoryId>
+    <Description>Bohrarbeiten für den Hausgebrauch bzw. für kleinere Baustellen geeignet</Description>
+    <PricePerDay>12.5</PricePerDay>
+  </ToolCategory>
+</ArrayOfToolCategory>
