@@ -84,7 +84,7 @@ namespace Werkzeugverleih.Screens
                     var editToolCategoryObject = new ToolCategoryManagement(storageAccess: _backgroundStorageToolCategory,
                                                                             source: _backgroundReadSource.ReadFilePath("ToolCategories"),
                                                                             categories: listOfCategories);
-                    int toolCategoryId = -1;
+
                     var toolCategoryElement = string.Empty;
                     var toolCategoryContent = string.Empty;
                     userInputChar = "j";
@@ -92,7 +92,7 @@ namespace Werkzeugverleih.Screens
                     {
                         Console.Clear();
                         Console.WriteLine("Enter the tool category Id you want to edit: ");
-                        toolCategoryId = ConvertNumbers.ConvertInteger();
+                        var toolCategoryId = ConvertNumbers.ConvertInteger();
                         Console.WriteLine("You can edit the following properties");
                         Console.WriteLine("*******************************************");
                         Console.WriteLine("1 Category Id");
@@ -130,7 +130,7 @@ namespace Werkzeugverleih.Screens
                             {
                                 toolCategoryContent = ConvertNumbers.ConvertInteger().ToString();
                             }
-                            else if(toolCategoryElement.Equals("PricePerDay"))
+                            else if (toolCategoryElement.Equals("PricePerDay"))
                             {
                                 toolCategoryContent = ConvertNumbers.ConvertDecimal().ToString();
                             }

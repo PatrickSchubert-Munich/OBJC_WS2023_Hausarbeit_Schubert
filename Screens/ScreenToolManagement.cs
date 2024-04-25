@@ -89,7 +89,7 @@ namespace Werkzeugverleih.Screens
                 case 2:
                     var editToolObject = new ToolManagement(storageAccess: _backgroundStorageTool,
                                                             source: _backgroundReadSource.ReadFilePath("Tools"));
-                    int toolId = -1;
+
                     var toolElement = string.Empty;
                     var toolContent = string.Empty;
                     userInputChar = "j";
@@ -97,7 +97,7 @@ namespace Werkzeugverleih.Screens
                     {
                         Console.Clear();
                         Console.WriteLine("Enter the tool ID you want to edit: ");
-                        toolId = ConvertNumbers.ConvertInteger();
+                        var toolId = ConvertNumbers.ConvertInteger();
                         Console.WriteLine("You can edit the following properties");
                         Console.WriteLine("*******************************************");
                         Console.WriteLine("1 Manufactorer");
@@ -121,33 +121,36 @@ namespace Werkzeugverleih.Screens
                                 break;
                         }
 
-                        if(toolElement.Equals("PowerSupply"))
+                        if (toolElement.Equals("PowerSupply"))
                         {
                             Console.WriteLine("Please enter a numeric value for the type of power supply: ");
                             Console.WriteLine("0: Battery pack");
                             Console.WriteLine("1: Cable tied");
                             Console.WriteLine("2: De-energized");
                             var tempPowerSupply = ConvertNumbers.ConvertInteger();
-                            
-                            if(tempPowerSupply.Equals(0))
+
+                            if (tempPowerSupply.Equals(0))
                             {
                                 toolContent = "BatteryPack";
-                            } else if(tempPowerSupply.Equals(1))
+                            }
+                            else if (tempPowerSupply.Equals(1))
                             {
                                 toolContent = "Cable";
-                            } else
+                            }
+                            else
                             {
                                 toolContent = "DeEnergized";
                             }
-                            
+
                             Console.WriteLine();
-                        } else
+                        }
+                        else
                         {
                             Console.WriteLine();
                             Console.WriteLine("Please enter your change: ");
                             toolContent = Console.ReadLine();
                         }
-                        
+
                         if (toolContent != null)
                         {
                             editToolObject.EditItem(toolId, toolElement, toolContent);

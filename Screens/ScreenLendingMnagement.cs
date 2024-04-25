@@ -117,7 +117,7 @@ namespace Werkzeugverleih.Screens
                                 }
                             }
 
-                            var lending = new Lending(  lendingDuration: lendingDays,
+                            var lending = new Lending(lendingDuration: lendingDays,
                                                         singleCosts: singleCosts,
                                                         customerId: customerId,
                                                         toolId: tool.ToolId,
@@ -141,15 +141,16 @@ namespace Werkzeugverleih.Screens
                 case 2:
                     var editLendingObject = new LendingManagement(storageAccess: _backgroundStorageLendingManagement,
                                                                   source: _backgroundReadSource.ReadFilePath("Lendings"));
-                    int lendingId = -1;
+
                     var lendingElement = string.Empty;
                     var lendingContent = string.Empty;
+
                     userInputChar = "j";
                     while (userInputChar.Equals("j"))
                     {
                         Console.Clear();
                         Console.WriteLine("Enter the lending Id you want to edit: ");
-                        lendingId = ConvertNumbers.ConvertInteger();
+                        var lendingId = ConvertNumbers.ConvertInteger();
                         Console.WriteLine("You can edit the following properties");
                         Console.WriteLine("*******************************************");
                         Console.WriteLine("1 Customer - Id");

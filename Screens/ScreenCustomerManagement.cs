@@ -55,9 +55,16 @@ namespace Werkzeugverleih.Screens
                         var name = Console.ReadLine();
                         Console.WriteLine();
 
-                        Console.WriteLine("Please enter gender: ");
+                        Console.WriteLine("Please enter a gender (m / w): ");
                         var gender = Console.ReadLine();
                         Console.WriteLine();
+
+                        // auto correction of typo-mistakes
+                        if (gender.Contains('m'))
+                        {
+                            gender = "m";
+                        }
+                        else gender = "w";
 
                         Console.WriteLine("Please enter the day of the birthday: ");
                         var day = ConvertNumbers.ConvertInteger();
@@ -79,6 +86,13 @@ namespace Werkzeugverleih.Screens
                         Console.WriteLine("Please enter a customer type (privat / bussiness): ");
                         var customerType = Console.ReadLine();
                         Console.WriteLine();
+
+                        // auto correction of typo-mistakes
+                        if (customerType.Contains("priv") || customerType.Contains("vat"))
+                        {
+                            customerType = "privat";
+                        }
+                        else customerType = "bussiness";
 
                         Console.WriteLine("Please enter a valid phone number: ");
                         var telephoneNumber = Console.ReadLine();
@@ -116,15 +130,14 @@ namespace Werkzeugverleih.Screens
                 case 2:
                     var editCustomerObject = new CustomerManagement(storageAccess: _backgroundStorageCustomer,
                                                                     source: _backgroundReadSource.ReadFilePath("Customers"));
-                    int customerId = -1;
                     var customerElement = string.Empty;
-                    var customerContent = string.Empty;
                     userInputChar = "j";
+
                     while (userInputChar.Equals("j"))
                     {
                         Console.Clear();
                         Console.WriteLine("Enter the customers ID you want to edit: ");
-                        customerId = ConvertNumbers.ConvertInteger();
+                        var customerId = ConvertNumbers.ConvertInteger();
                         Console.WriteLine("You can edit the following properties");
                         Console.WriteLine("*******************************************");
                         Console.WriteLine("1 Surname");
@@ -174,7 +187,7 @@ namespace Werkzeugverleih.Screens
 
                         Console.WriteLine();
                         Console.WriteLine("Please enter your changes: ");
-                        customerContent = Console.ReadLine();
+                        var customerContent = Console.ReadLine();
                         if (customerContent != null)
                         {
                             editCustomerObject.EditItem(customerId, customerElement, customerContent);
