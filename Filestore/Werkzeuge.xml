@@ -5,34 +5,34 @@
     <ToolId>6</ToolId>
     <Manufactorer>SpeedTools</Manufactorer>
     <Bezeichnung>Rasenmaeher R900</Bezeichnung>
-    <PowerSupply>Kabel</PowerSupply>
+    <PowerSupply>Cable</PowerSupply>
   </Tool>
   <Tool>
     <CategoryId>10</CategoryId>
     <ToolId>5</ToolId>
     <Manufactorer>Siemens</Manufactorer>
     <Description>Zauneidechse</Description>
-    <PowerSupply>Akku</PowerSupply>
-  </Tool>
-  <Tool>
-    <CategoryId>40</CategoryId>
-    <ToolId>4</ToolId>
-    <Manufactorer>Bleck&amp;Decker</Manufactorer>
-    <Description>Bohrmaschine BD-98</Description>
-    <PowerSupply>Kabel</PowerSupply>
+    <PowerSupply>BatteryPack</PowerSupply>
   </Tool>
   <Tool>
     <CategoryId>20</CategoryId>
-    <ToolId>3</ToolId>
-    <Manufactorer>Bosch</Manufactorer>
-    <Description>Handsäge GM-180z</Description>
-    <PowerSupply>Akku</PowerSupply>
+    <ToolId>4</ToolId>
+    <Manufactorer>Bleck&amp;Decker</Manufactorer>
+    <Description>Bohrmaschine BD-98</Description>
+    <PowerSupply>Cable</PowerSupply>
   </Tool>
   <Tool>
     <CategoryId>30</CategoryId>
+    <ToolId>3</ToolId>
+    <Manufactorer>Bosch</Manufactorer>
+    <Description>Handsaege GM-180z</Description>
+    <PowerSupply>BatteryPack</PowerSupply>
+  </Tool>
+  <Tool>
+    <CategoryId>40</CategoryId>
     <ToolId>2</ToolId>
     <Manufactorer>Hilti</Manufactorer>
     <Description>Bohrhammer H190</Description>
-    <PowerSupply>Stromlos</PowerSupply>
+    <PowerSupply>DeEnergized</PowerSupply>
   </Tool>
 </ArrayOfTool>

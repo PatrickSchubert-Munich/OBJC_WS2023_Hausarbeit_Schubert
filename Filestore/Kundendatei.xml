@@ -1,6 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfCustomer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Customer>
+    <Id>3</Id>
+    <Surname>Max</Surname>
+    <Name>Mustermannmann</Name>
+    <Birthday>1998-10-05T00:00:00</Birthday>
+    <Gender>maennlich</Gender>
+    <Address>Webergasse 100-118</Address>
+    <BankAccount>DE98 1100 1010 3003 44</BankAccount>
+    <CustomerType>privat</CustomerType>
+    <TelephoneNumber>0162 621 55 621</TelephoneNumber>
+    <Rating>3</Rating>
+  </Customer>
+  <Customer>
     <Id>2</Id>
     <Surname>Sara</Surname>
     <Name>Grossmann</Name>
@@ -9,7 +21,7 @@
     <Address>Hauptstrasse 10b</Address>
     <BankAccount>DE66 7568 7465 3677 35</BankAccount>
     <CustomerType>geschaeftlich</CustomerType>
-    <TelephoneNumber>0152 839 474 278 34</TelephoneNumber>
+    <TelephoneNumber>0152 844 58 278</TelephoneNumber>
     <Rating>3</Rating>
   </Customer>
   <Customer>
@@ -18,10 +30,10 @@
     <Name>Mustermann</Name>
     <Birthday>1998-05-30T00:00:00</Birthday>
     <Gender>maennlich</Gender>
-    <Address>Habergasse 20c</Address>
-    <BankAccount>De55 7863 2435 2888 29</BankAccount>
+    <Address>Habergasse 20</Address>
+    <BankAccount>DE55 7863 1001 2888 29</BankAccount>
     <CustomerType>privat</CustomerType>
-    <TelephoneNumber>0151 567 24 567 25</TelephoneNumber>
-    <Rating>2</Rating>
+    <TelephoneNumber>0151 101 24 567</TelephoneNumber>
+    <Rating>4</Rating>
   </Customer>
 </ArrayOfCustomer>
