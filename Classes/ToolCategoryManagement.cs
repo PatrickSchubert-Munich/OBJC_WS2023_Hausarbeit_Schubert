@@ -65,7 +65,7 @@ namespace Werkzeugverleih.Classes
 
             // Write Message to console
             Console.WriteLine();
-            Console.WriteLine($"Tool category successfully created.");
+            Console.WriteLine($"Tool category successfully created...");
             Console.WriteLine();
         }
 
@@ -153,18 +153,19 @@ namespace Werkzeugverleih.Classes
                 // Display tool category data on screen 
                 foreach (var toolCategory in toolCategoryObjects)
                 {
-                    Console.WriteLine($"******************************** Tool Category Data {++count} **********************************");
+                    Console.WriteLine($"******************************** Tool Category {++count} **********************************");
                     Console.WriteLine($"Tool category ID:   {toolCategory.CategoryId}\n" +
                                       $"Name of Category:   {toolCategory.Name}\n" +
                                       $"Description:        {toolCategory.Description}\n" +
                                       $"Price per day:      {toolCategory.PricePerDay}\n" +
-                                      "****************************************************************************************\n");
+                                      "***********************************************************************************\n");
                 }
             }
             else
             {
-                // Error Message
-                Console.WriteLine("Error: Result of deserialization is null.");
+                // Console Message
+                Console.WriteLine("No tool categories available...");
+                Console.WriteLine();
             }
         }
 

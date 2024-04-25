@@ -147,19 +147,20 @@ namespace Werkzeugverleih.Classes
                 // Show tools data on screen 
                 foreach (var tool in toolObjects)
                 {
-                    Console.WriteLine($"*************************** Tool Data {++count} *****************************");
+                    Console.WriteLine($"********************** Tool {++count} **********************");
                     Console.WriteLine($"Tool ID:            {tool.ToolId}\n" +
                                       $"Category ID:        {tool.CategoryId}\n" +
                                       $"Manufactorer:       {tool.Manufactorer}\n" +
                                       $"Name of Tool:       {tool.Description}\n" +
                                       $"Power supply:       {tool.PowerSupply}\n" +
-                                      "*********************************************************************\n");
+                                      "****************************************************\n");
                 }
             }
             else
             {
-                // Error Message
-                Console.WriteLine("Error: Result of deserialization is null.");
+                // Console Message
+                Console.WriteLine("No tools available...");
+                Console.WriteLine();
             }
         }
 

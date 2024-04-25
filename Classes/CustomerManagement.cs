@@ -54,7 +54,7 @@ namespace Werkzeugverleih.Classes
 
             // Write Message to console
             Console.WriteLine();
-            Console.WriteLine($"Customers successfully created.");
+            Console.WriteLine($"Customers successfully created...");
             Console.WriteLine();
         }
 
@@ -119,7 +119,7 @@ namespace Werkzeugverleih.Classes
                 {
                     // Remove the customer element from the XML
                     customerToRemove.Remove();
-                    Console.WriteLine("Customer removed successfully.");
+                    Console.WriteLine("Customer removed successfully...");
                 }
                 else
                 {
@@ -128,7 +128,7 @@ namespace Werkzeugverleih.Classes
 
                 // Save back changes to XML-File
                 customersXdoc.Save(_source);
-                Console.WriteLine("XML saved with changes.");
+                Console.WriteLine("XML saved with changes...");
             }
             catch (NullReferenceException ex)
             {
@@ -163,7 +163,7 @@ namespace Werkzeugverleih.Classes
                     // Check also, if Customer is not null
                     if (kunde != null)
                     {
-                        Console.WriteLine($"********************** Customer Data {++count} *******************");
+                        Console.WriteLine($"************************ Customer {++count} **********************");
                         Console.WriteLine($"Surname:        {kunde.Surname}\n" +
                                           $"Name:           {kunde.Name}\n" +
                                           $"Gender:         {kunde.Gender}\n" +
@@ -178,8 +178,9 @@ namespace Werkzeugverleih.Classes
             }
             else
             {
-                // Error Message
-                Console.WriteLine("Error: Result of deserialization is null.");
+                // Console Message
+                Console.WriteLine("No customers available...");
+                Console.WriteLine();
             }
         }
 

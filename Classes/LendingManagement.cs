@@ -147,7 +147,7 @@ namespace Werkzeugverleih.Classes
                 {
                     if (lending != null)
                     {
-                        Console.WriteLine($"*************************** Lending Data {++count} ************************");
+                        Console.WriteLine($"*************************** Lending {++count} ************************");
                         Console.WriteLine($"Lemding - Id:                 {lending.LendingId}\n" +
                                           $"Customer - Id:                {lending.CustomerId}\n" +
                                           $"Customers Name:               {lending.CustomerFullName}\n" +
@@ -166,8 +166,9 @@ namespace Werkzeugverleih.Classes
             }
             else
             {
-                // Error Message
-                Console.WriteLine("No Lendings available.");
+                // Console Message
+                Console.WriteLine("No lendings available.");
+                Console.WriteLine();
             }
         }
 
