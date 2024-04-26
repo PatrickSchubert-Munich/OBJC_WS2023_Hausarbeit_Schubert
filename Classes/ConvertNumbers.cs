@@ -61,8 +61,6 @@
 
             while (isDoubleInputCorrect == false)
             {
-
-
                 try
                 {
                     entree = Console.ReadLine();
@@ -96,8 +94,6 @@
 
             while (isDoubleInputCorrect == false)
             {
-
-
                 try
                 {
                     entree = Console.ReadLine();

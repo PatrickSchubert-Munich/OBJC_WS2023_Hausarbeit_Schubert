@@ -12,7 +12,7 @@ namespace Werkzeugverleih.Screens
         public static int userInputNumber;
         public const int QUITT_MAIN_MENUE = 5;
         public static List<Customer> listOfCustomers = new List<Customer>();
-        public static IReadPath _backgroundReadSource = new ReadConfiguration();
+        public static IReadPath _ReadFilePathCustomer = new ReadConfiguration();
         public static IStorageHandler _backgroundStorageCustomer = new XmlHandler<Customer>();
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace Werkzeugverleih.Screens
                 // Create new Customers
                 case 1:
                     var checkCustomerIdObject = new CustomerManagement(storageAccess: _backgroundStorageCustomer,
-                                                                       source: _backgroundReadSource.ReadFilePath("Customers"));
+                                                                      source: _ReadFilePathCustomer.ReadFilePath("Customers"));
                     Customer.countId = checkCustomerIdObject.ReadCustomerIDs();
 
                     userInputChar = "j";
@@ -119,17 +119,16 @@ namespace Werkzeugverleih.Screens
                         userInputChar = Console.ReadLine().ToLower();
                     }
 
-                    // CustomerManagement aufrufen
-                    var kundenverwaltung = new CustomerManagement(storageAccess: _backgroundStorageCustomer,
-                                                                  source: _backgroundReadSource.ReadFilePath("Customers"),
-                                                                  customers: listOfCustomers);
-                    kundenverwaltung.CreateItem();
+                    var createCustomerObject = new CustomerManagement(storageAccess: _backgroundStorageCustomer,
+                                                                      source: _ReadFilePathCustomer.ReadFilePath("Customers"),
+                                                                      customers: listOfCustomers);
+                    createCustomerObject.CreateItem();
                     listOfCustomers.Clear();
                     break;
                 // Edit Customers
                 case 2:
                     var editCustomerObject = new CustomerManagement(storageAccess: _backgroundStorageCustomer,
-                                                                    source: _backgroundReadSource.ReadFilePath("Customers"));
+                                                                    source: _ReadFilePathCustomer.ReadFilePath("Customers"));
                     var customerElement = string.Empty;
                     userInputChar = "j";
 
@@ -200,19 +199,17 @@ namespace Werkzeugverleih.Screens
                     break;
                 // Delete Customers
                 case 3:
-                    // create object
-                    var customerObject = new CustomerManagement(storageAccess: _backgroundStorageCustomer,
-                                                                source: _backgroundReadSource.ReadFilePath("Customers"),
+                    var deleteCustomerObject = new CustomerManagement(storageAccess: _backgroundStorageCustomer,
+                                                                source: _ReadFilePathCustomer.ReadFilePath("Customers"),
                                                                 customers: listOfCustomers);
                     userInputChar = "j";
                     while (userInputChar.Equals("j"))
                     {
                         Console.Clear();
-                        //Console.SetCursorPosition(0, 1);
                         Console.WriteLine("Please enter a customer ID you want to delete: ");
                         var idToDelete = ConvertNumbers.ConvertInteger();
                         Console.WriteLine();
-                        customerObject.DeleteItem(idToDelete);
+                        deleteCustomerObject.DeleteItem(idToDelete);
                         Console.WriteLine();
                         Console.WriteLine("Do you want to delete another category? Press key j or n: ");
                         userInputChar = Console.ReadLine().ToLower();
@@ -221,13 +218,13 @@ namespace Werkzeugverleih.Screens
                     break;
                 // Display Customers
                 case 4:
-                    var customerObjectToShow = new CustomerManagement(storageAccess: _backgroundStorageCustomer,
-                                                                      source: _backgroundReadSource.ReadFilePath("Customers"));
+                    var showCustomerObject = new CustomerManagement(storageAccess: _backgroundStorageCustomer,
+                                                                      source: _ReadFilePathCustomer.ReadFilePath("Customers"));
                     userInputChar = "j";
                     while (userInputChar.Equals("j"))
                     {
                         Console.Clear();
-                        customerObjectToShow.ShowItem();
+                        showCustomerObject.ShowItem();
                         Console.WriteLine("To exit, press any key and/or press the Enter key...");
                         userInputChar = Console.ReadLine().ToUpper();
                     }
@@ -236,7 +233,6 @@ namespace Werkzeugverleih.Screens
                 // Quitt Menue
                 case 5:
                     userInputNumber = QUITT_MAIN_MENUE;
-                    //Program.backToMainMenue = Convert.ToString(QUITT_MAIN_MENUE);
                     Console.Clear();
                     break;
                 // Default case

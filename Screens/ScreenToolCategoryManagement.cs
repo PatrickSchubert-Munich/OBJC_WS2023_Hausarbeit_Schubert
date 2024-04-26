@@ -12,7 +12,7 @@ namespace Werkzeugverleih.Screens
         public static int userInputNumber;
         public const int QUITT_MAIN_MENUE = 5;
         public static List<ToolCategory> listOfCategories = new List<ToolCategory>();
-        public static IReadPath _backgroundReadSource = new ReadConfiguration();
+        public static IReadPath _ReadFilePathToolCategory = new ReadConfiguration();
         public static IStorageHandler _backgroundStorageToolCategory = new XmlHandler<ToolCategory>();
 
         /// <summary>
@@ -58,7 +58,6 @@ namespace Werkzeugverleih.Screens
                         var toolCategoryPricePerDay = ConvertNumbers.ConvertDecimal();
                         Console.WriteLine();
 
-                        // Tool anlegen
                         var toolCategory = new ToolCategory(categoryId: toolCatId,
                                                             name: toolCategoryName,
                                                             description: toolCategoryDescription,
@@ -71,10 +70,10 @@ namespace Werkzeugverleih.Screens
                         userInputChar = Console.ReadLine().ToLower();
                     }
 
-                    var toolCategoryManagement = new ToolCategoryManagement(storageAccess: _backgroundStorageToolCategory,
-                                                                            source: _backgroundReadSource.ReadFilePath("ToolCategories"),
-                                                                            categories: listOfCategories);
-                    toolCategoryManagement.CreateItem();
+                    var crateToolCategory = new ToolCategoryManagement(storageAccess: _backgroundStorageToolCategory,
+                                                                       source: _ReadFilePathToolCategory.ReadFilePath("ToolCategories"),
+                                                                       categories: listOfCategories);
+                    crateToolCategory.CreateItem();
                     listOfCategories.Clear();
                     userInputNumber = -1;
                     break;
@@ -82,7 +81,7 @@ namespace Werkzeugverleih.Screens
                 // Edit tool category
                 case 2:
                     var editToolCategoryObject = new ToolCategoryManagement(storageAccess: _backgroundStorageToolCategory,
-                                                                            source: _backgroundReadSource.ReadFilePath("ToolCategories"),
+                                                                            source: _ReadFilePathToolCategory.ReadFilePath("ToolCategories"),
                                                                             categories: listOfCategories);
 
                     var toolCategoryElement = string.Empty;
@@ -159,19 +158,17 @@ namespace Werkzeugverleih.Screens
 
                 // Delete tool category
                 case 3:
-                    // create object
-                    var toolCategoryObject = new ToolCategoryManagement(storageAccess: _backgroundStorageToolCategory,
-                                                                        source: _backgroundReadSource.ReadFilePath("ToolCategories"),
+                    var deleteToolCategoryObject = new ToolCategoryManagement(storageAccess: _backgroundStorageToolCategory,
+                                                                        source: _ReadFilePathToolCategory.ReadFilePath("ToolCategories"),
                                                                         categories: listOfCategories);
                     userInputChar = "j";
                     while (userInputChar.Equals("j"))
                     {
                         Console.Clear();
-                        //Console.SetCursorPosition(0, 1);
                         Console.WriteLine("Please enter the Id of the tool category you want to delete: ");
                         var idToDelete = ConvertNumbers.ConvertInteger();
                         Console.WriteLine();
-                        toolCategoryObject.DeleteItem(idToDelete);
+                        deleteToolCategoryObject.DeleteItem(idToDelete);
                         Console.WriteLine();
                         Console.WriteLine("Do you want to delete another tool category? Press key j or n: ");
                         userInputChar = Console.ReadLine().ToLower();
@@ -180,13 +177,13 @@ namespace Werkzeugverleih.Screens
                     break;
                 // Display tool category
                 case 4:
-                    var toolCategoryObjectToShow = new ToolCategoryManagement(storageAccess: _backgroundStorageToolCategory,
-                                                                        source: _backgroundReadSource.ReadFilePath("ToolCategories"));
+                    var showToolCategoryObject = new ToolCategoryManagement(storageAccess: _backgroundStorageToolCategory,
+                                                                        source: _ReadFilePathToolCategory.ReadFilePath("ToolCategories"));
                     userInputChar = "j";
                     while (userInputChar.Equals("j"))
                     {
                         Console.Clear();
-                        toolCategoryObjectToShow.ShowItem();
+                        showToolCategoryObject.ShowItem();
                         Console.WriteLine("To exit, press any key and/or press the Enter key...");
                         userInputChar = Console.ReadLine().ToUpper();
                     }
@@ -195,7 +192,6 @@ namespace Werkzeugverleih.Screens
                 // Quitt Menue
                 case 5:
                     userInputNumber = QUITT_MAIN_MENUE;
-                    //Program.backToMainMenue = Convert.ToString(QUITT_MAIN_MENUE);
                     Console.Clear();
                     break;
                 // Default case

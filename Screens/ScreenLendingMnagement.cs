@@ -13,7 +13,7 @@ namespace Werkzeugverleih.Screens
         public const int QUITT_MAIN_MENUE = 5;
         public static List<Lending> listOfLendings = new List<Lending>();
         public static List<int> ListOfLendingToolIds = new List<int>();
-        public static IReadPath _backgroundReadSource = new ReadConfiguration();
+        public static IReadPath _ReadFilePath = new ReadConfiguration();
         public static IStorageHandler _backgroundStorageCustomer = new XmlHandler<Customer>();
         public static IStorageHandler _backgroundStorageTool = new XmlHandler<Tool>();
         public static IStorageHandler _backgroundStorageToolCategory = new XmlHandler<ToolCategory>();
@@ -41,21 +41,16 @@ namespace Werkzeugverleih.Screens
 
             switch (userInputNumber)
             {
-                // Edit new lendings
+                // Create new lendings
                 case 1:
-                    ToolManagement ToolManagementObject = new ToolManagement(storageAccess: _backgroundStorageTool,
-                                                                             source: _backgroundReadSource.ReadFilePath("Tools"));
+                    ToolManagement createLendingToolObject = new ToolManagement(storageAccess: _backgroundStorageTool,
+                                                                                source: _ReadFilePath.ReadFilePath("Tools"));
 
-                    CustomerManagement customerManagementObject = new CustomerManagement(storageAccess: _backgroundStorageCustomer,
-                                                                                          source: _backgroundReadSource.ReadFilePath("Customers"));
+                    CustomerManagement createLendingCustomerObject = new CustomerManagement(storageAccess: _backgroundStorageCustomer,
+                                                                                            source: _ReadFilePath.ReadFilePath("Customers"));
 
-                    ToolCategoryManagement toolCategoryManagementObject = new ToolCategoryManagement(storageAccess: _backgroundStorageToolCategory,
-                                                                                                     source: _backgroundReadSource.ReadFilePath("ToolCategories"));
-
-                    LendingManagement lendingManagementObject = new LendingManagement(storageAccess: _backgroundStorageLendingManagement,
-                                                                                      source: _backgroundReadSource.ReadFilePath("Lendings"));
-
-                    Lending.countLendingId = lendingManagementObject.ReadLendingIDs();
+                    ToolCategoryManagement createLendingToolCategoryObject = new ToolCategoryManagement(storageAccess: _backgroundStorageToolCategory,
+                                                                                                        source: _ReadFilePath.ReadFilePath("ToolCategories"));
 
                     string custAdress = string.Empty;
                     string custFullName = string.Empty;
@@ -77,7 +72,7 @@ namespace Werkzeugverleih.Screens
                             toolId = ConvertNumbers.ConvertInteger(Console.ReadLine());
 
                             Console.WriteLine("How many days would you like to borrow the tool? (input only in full days): ");
-                            lendingDays = TimeSpan.FromDays(ConvertNumbers.ConvertInteger(Console.ReadLine()));
+                            lendingDays = TimeSpan.FromDays(ConvertNumbers.ConvertInteger());
 
                             ListOfLendingToolIds.Add(toolId);
 
@@ -86,13 +81,12 @@ namespace Werkzeugverleih.Screens
                             Console.WriteLine();
                         }
 
-
-                        var lendingTool = new LendingTool(toolIds: ListOfLendingToolIds, toolManagement: ToolManagementObject);
-                        var lendingCustomer = new LendingCustomer(customerId: customId, customerManagement: customerManagementObject);
+                        var lendingTool = new LendingTool(toolIds: ListOfLendingToolIds, toolManagement: createLendingToolObject);
+                        var lendingCustomer = new LendingCustomer(customerId: customId, customerManagement: createLendingCustomerObject);
+                        ListOfLendingToolIds.Clear();
 
                         var customer = lendingCustomer.Customer;
                         var tools = lendingTool.Tool;
-
 
                         foreach (var cust in customer)
                         {
@@ -104,43 +98,58 @@ namespace Werkzeugverleih.Screens
                             }
                         }
 
-                        var toolCategories = toolCategoryManagementObject.GetItem();
-
-                        foreach (var tool in tools)
+                        if (customerId != -1)
                         {
-                            foreach (var toolCategory in toolCategories)
+                            var toolCategories = createLendingToolCategoryObject.GetItem();
+
+                            LendingManagement checkLendingIdObject = new LendingManagement(storageAccess: _backgroundStorageLendingManagement,
+                                                                                          source: _ReadFilePath.ReadFilePath("Lendings"));
+
+                            foreach (var tool in tools)
                             {
-                                if (toolCategory.CategoryId == tool.CategoryId)
+                                foreach (var toolCategory in toolCategories)
                                 {
-                                    singleCosts = toolCategory.PricePerDay;
-                                    break;
+                                    if (toolCategory.CategoryId == tool.CategoryId)
+                                    {
+                                        singleCosts = toolCategory.PricePerDay;
+                                        break;
+                                    }
                                 }
+
+                                checkLendingIdObject.ReadLendingIDs();
+
+                                var lending = new Lending(lendingDuration: lendingDays,
+                                                          singleCosts: singleCosts,
+                                                          customerId: customerId,
+                                                          toolId: tool.ToolId,
+                                                          categoryId: tool.CategoryId,
+                                                          customerFullName: custFullName,
+                                                          customerAdress: custAdress,
+                                                          toolManufactorer: tool.Manufactorer,
+                                                          toolName: tool.Description);
+
+                                listOfLendings.Add(lending);
                             }
 
-                            var lending = new Lending(lendingDuration: lendingDays,
-                                                        singleCosts: singleCosts,
-                                                        customerId: customerId,
-                                                        toolId: tool.ToolId,
-                                                        categoryId: tool.CategoryId,
-                                                        customerFullName: custFullName,
-                                                        customerAdress: custAdress,
-                                                        toolManufactorer: tool.Manufactorer,
-                                                        toolName: tool.Description);
-                            listOfLendings.Add(lending);
+                            // LendingManagement aufrufen
+                            var createLendingObject = new LendingManagement(storageAccess: _backgroundStorageLendingManagement,
+                                                                            source: _ReadFilePath.ReadFilePath("Lendings"),
+                                                                            lendings: listOfLendings);
+                            createLendingObject.CreateItem();
                         }
-                    }
+                        else
+                        {
+                            Console.WriteLine("Customer with this Id not found! See in customers file which customer Ids you can choose.");
+                            userInputChar = Console.ReadLine().ToLower();
+                        }
 
-                    // LendingManagement aufrufen
-                    var lendingCreateObject = new LendingManagement(storageAccess: _backgroundStorageLendingManagement,
-                                                            source: _backgroundReadSource.ReadFilePath("Lendings"),
-                                                            lendings: listOfLendings);
-                    lendingCreateObject.CreateItem();
-                    listOfLendings.Clear();
+                        listOfLendings.Clear();
+                    }
                     break;
                 // Edit lendings
                 case 2:
                     var editLendingObject = new LendingManagement(storageAccess: _backgroundStorageLendingManagement,
-                                                                  source: _backgroundReadSource.ReadFilePath("Lendings"));
+                                                                  source: _ReadFilePath.ReadFilePath("Lendings"));
 
                     var lendingElement = string.Empty;
                     var lendingContent = string.Empty;
@@ -230,9 +239,8 @@ namespace Werkzeugverleih.Screens
                     break;
                 // Delete lendings
                 case 3:
-                    // create object
-                    LendingManagement lendingObject = new LendingManagement(storageAccess: _backgroundStorageLendingManagement,
-                                                                            source: _backgroundReadSource.ReadFilePath("Lendings"));
+                    LendingManagement deleteLendingObject = new LendingManagement(storageAccess: _backgroundStorageLendingManagement,
+                                                                            source: _ReadFilePath.ReadFilePath("Lendings"));
 
                     userInputChar = "j";
                     while (userInputChar.Equals("j"))
@@ -241,7 +249,7 @@ namespace Werkzeugverleih.Screens
                         Console.WriteLine("Please enter a lending Id you want to delete: ");
                         var idToDelete = ConvertNumbers.ConvertInteger();
                         Console.WriteLine();
-                        lendingObject.DeleteItem(idToDelete);
+                        deleteLendingObject.DeleteItem(idToDelete);
                         Console.WriteLine();
                         Console.WriteLine("Do you want to delete another lending? Press key j or n: ");
                         userInputChar = Console.ReadLine().ToLower();
@@ -249,13 +257,13 @@ namespace Werkzeugverleih.Screens
                     break;
                 // Display lendings
                 case 4:
-                    var lendingObjectToShow = new LendingManagement(storageAccess: _backgroundStorageLendingManagement,
-                                                                    source: _backgroundReadSource.ReadFilePath("Lendings"));
+                    var showLendingObject = new LendingManagement(storageAccess: _backgroundStorageLendingManagement,
+                                                                    source: _ReadFilePath.ReadFilePath("Lendings"));
                     userInputChar = "j";
                     while (userInputChar.Equals("j"))
                     {
                         Console.Clear();
-                        lendingObjectToShow.ShowItem();
+                        showLendingObject.ShowItem();
                         Console.WriteLine("To exit, press any key and/or press the Enter key...");
                         userInputChar = Console.ReadLine().ToUpper();
                     }
@@ -263,7 +271,6 @@ namespace Werkzeugverleih.Screens
                 // Quitt Menue
                 case 5:
                     userInputNumber = QUITT_MAIN_MENUE;
-                    //Program.backToMainMenue = Convert.ToString(QUITT_MAIN_MENUE);
                     Console.Clear();
                     break;
                 // Default case

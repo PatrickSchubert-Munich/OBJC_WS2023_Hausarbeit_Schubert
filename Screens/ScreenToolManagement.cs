@@ -14,7 +14,7 @@ namespace Werkzeugverleih.Screens
         public static int userInputNumber;
         public const int QUITT_MAIN_MENUE = 5;
         public static List<Tool> listOfTools = new List<Tool>();
-        public static IReadPath _backgroundReadSource = new ReadConfiguration();
+        public static IReadPath _ReadFilePathTool = new ReadConfiguration();
         public static IStorageHandler _backgroundStorageTool = new XmlHandler<Tool>();
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace Werkzeugverleih.Screens
                 // Create new tools
                 case 1:
                     var checkToolIdObject = new ToolManagement(storageAccess: _backgroundStorageTool,
-                                                               source: _backgroundReadSource.ReadFilePath("Tools"));
+                                                               source: _ReadFilePathTool.ReadFilePath("Tools"));
                     Tool.countId = checkToolIdObject.ReadToolIDs();
 
                     userInputChar = "j";
@@ -67,7 +67,6 @@ namespace Werkzeugverleih.Screens
                         var powerSupply = ConvertNumbers.ConvertInteger();
                         Console.WriteLine();
 
-                        // Tool anlegen
                         var tool = new Tool(categoryId: toolCatId,
                                             manufactorer: manufactorer,
                                             description: description,
@@ -78,17 +77,17 @@ namespace Werkzeugverleih.Screens
                         Console.WriteLine("Do you want to add another tool? Press key j or n: ");
                         userInputChar = Console.ReadLine().ToLower();
                     }
-                    // CustomerManagement aufrufen
-                    var toolManagement = new ToolManagement(storageAccess: _backgroundStorageTool,
-                                                            source: _backgroundReadSource.ReadFilePath("Tools"),
+
+                    var createToolObject = new ToolManagement(storageAccess: _backgroundStorageTool,
+                                                            source: _ReadFilePathTool.ReadFilePath("Tools"),
                                                             tools: listOfTools);
-                    toolManagement.CreateItem();
+                    createToolObject.CreateItem();
                     listOfTools.Clear();
                     break;
                 // Edit tools
                 case 2:
                     var editToolObject = new ToolManagement(storageAccess: _backgroundStorageTool,
-                                                            source: _backgroundReadSource.ReadFilePath("Tools"));
+                                                            source: _ReadFilePathTool.ReadFilePath("Tools"));
 
                     var toolElement = string.Empty;
                     var toolContent = string.Empty;
@@ -163,19 +162,17 @@ namespace Werkzeugverleih.Screens
                     break;
                 // Delete tools
                 case 3:
-                    // create object
-                    var toolObject = new ToolManagement(storageAccess: _backgroundStorageTool,
-                                                        source: _backgroundReadSource.ReadFilePath("Tools"),
+                    var deleteToolObject = new ToolManagement(storageAccess: _backgroundStorageTool,
+                                                        source: _ReadFilePathTool.ReadFilePath("Tools"),
                                                         tools: listOfTools);
                     userInputChar = "j";
                     while (userInputChar.Equals("j"))
                     {
                         Console.Clear();
-                        //Console.SetCursorPosition(0, 1);
                         Console.WriteLine("Please enter the Id you want to delete: ");
                         var idToDelete = ConvertNumbers.ConvertInteger();
 
-                        toolObject.DeleteItem(idToDelete);
+                        deleteToolObject.DeleteItem(idToDelete);
 
                         Console.WriteLine();
                         Console.WriteLine("Do you want to delete another tool? Press key j or n: ");
@@ -184,13 +181,13 @@ namespace Werkzeugverleih.Screens
                     break;
                 // Display tools
                 case 4:
-                    var toolObjectToShow = new ToolManagement(storageAccess: _backgroundStorageTool,
-                                                              source: _backgroundReadSource.ReadFilePath("Tools"));
+                    var showToolObject = new ToolManagement(storageAccess: _backgroundStorageTool,
+                                                              source: _ReadFilePathTool.ReadFilePath("Tools"));
                     userInputChar = "j";
                     while (userInputChar.Equals("j"))
                     {
                         Console.Clear();
-                        toolObjectToShow.ShowItem();
+                        showToolObject.ShowItem();
                         Console.WriteLine("To exit, press any key and/or press the Enter key...");
                         userInputChar = Console.ReadLine().ToUpper();
                     }
@@ -199,7 +196,6 @@ namespace Werkzeugverleih.Screens
                 // Quitt Menue
                 case 5:
                     userInputNumber = QUITT_MAIN_MENUE;
-                    //Program.backToMainMenue = Convert.ToString(QUITT_MAIN_MENUE);
                     Console.Clear();
                     break;
                 // Default case
